@@ -1,0 +1,9 @@
+# Overrides tuned for TPU v4-8
+train:
+  batch_size_per_device: 2
+  total_steps: 6000
+  save_interval_steps: 300
+algo:
+  rollout_batch_per_device: 2
+  total_updates: 2000
+  kl_coeff: 0.02

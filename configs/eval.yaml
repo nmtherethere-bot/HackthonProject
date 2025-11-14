@@ -1,0 +1,11 @@
+eval_name: eval_gsm8k
+checkpoint: checkpoints/grpo_best
+max_samples: 200
+batch_size_per_device: 4
+tokenizer_name: google/gemma-2-2b-it
+reasoning_tag: "<reasoning>"
+final_tag: "<final>"
+metrics:
+  - exact_match
+  - format_ok
+  - trace_length

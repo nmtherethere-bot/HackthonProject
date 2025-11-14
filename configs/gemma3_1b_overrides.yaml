@@ -1,0 +1,9 @@
+model_name: google/gemma-3-1b
+tokenizer_name: google/gemma-3-1b
+train:
+  batch_size_per_device: 4
+  lr: 1.5e-5
+rewards:
+  # Slightly shorter traces for smaller context budget
+  target_trace_min: 60
+  target_trace_max: 480

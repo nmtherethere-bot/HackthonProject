@@ -1,0 +1,47 @@
+run_name: grpo_gemma2_2b_reasoning_v4_8
+base_model_name: google/gemma-2-2b-it
+precision: bf16
+seed: 42
+
+algo:
+  name: grpo
+  rollout_batch_per_device: 2
+  rollout_max_steps: 128
+  update_epochs: 1
+  total_updates: 2000
+  kl_coeff: 0.02
+  gamma: 1.0
+  lam: 0.95
+  vf_coeff: 0.5
+  ent_coeff: 0.0
+
+rewards:
+  w_correct: 1.0
+  w_format: 0.2
+  w_length: -0.05
+  w_step: 0.1
+  w_stop: 0.1
+  target_trace_min: 80
+  target_trace_max: 600
+  answer_tag: "<final>"
+  reasoning_tag: "<reasoning>"
+
+prompts:
+  system: "You are a helpful math tutor. Solve step by step."
+  template: |
+    Solve the problem. Think step by step inside <reasoning>...</reasoning>.
+    Then output only the final numeric answer inside <final>...</final>.
+
+    Question: {question}
+    <reasoning>
+
+data:
+  train_path: data/processed/gsm8k_train.jsonl
+  question_key: question
+  answer_key: answer
+  tokenizer_name: google/gemma-2-2b-it
+
+output:
+  out_dir: checkpoints/grpo
+  save_interval_updates: 50
+  log_interval_updates: 5

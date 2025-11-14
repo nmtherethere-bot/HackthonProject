@@ -1,0 +1,11 @@
+tunix
+transformers
+datasets
+sentencepiece
+accelerate
+rich
+wandb
+numpy
+python-dotenv
+evaluate
+Pillow>=10.0.0
